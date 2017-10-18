@@ -34,7 +34,7 @@ $(function() {
         it('has a URL', function () {
             allFeeds.forEach(function (item) {
                 expect(item.url).toBeDefined();
-            })
+            });
         });
 
         /* done: Write a test that loops through each feed
@@ -44,12 +44,12 @@ $(function() {
         it('has a name', function () {
             allFeeds.forEach(function (item) {
                 expect(item.name).toBeDefined();
-            })
+            });
         });
         it('item name is not empty', function () {
             allFeeds.forEach(function (item) {
                 expect(item.name).toBeTruthy();
-            })
+            });
         });
 
     });
@@ -63,7 +63,7 @@ $(function() {
 
         beforeAll(function () {
             body = $('body');
-        })
+        });
 
         /* done: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -72,7 +72,7 @@ $(function() {
          */
 
         it('is hidden by default', function () {
-            expect(body.attr('class')).toBe('menu-hidden')
+            expect(body.attr('class')).toBe('menu-hidden');
         });
 
          /* done: Write a test that ensures the menu changes
@@ -105,7 +105,7 @@ $(function() {
         });
 
         it('is not empty', function (done) {
-            var container = $('.feed')
+            var container = $('.feed');
             expect(Boolean(container.find('entry'))).toBe(true);
             done();
         });
@@ -126,7 +126,7 @@ $(function() {
                 before = $('.header-title').text();
 
                 loadFeed(1, function() {
-                    after = $('.header-title').text()
+                    after = $('.header-title').text();
                     done();
                 });
             });
