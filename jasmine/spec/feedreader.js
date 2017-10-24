@@ -34,7 +34,12 @@ $(function() {
         it('has a URL', function () {
             allFeeds.forEach(function (item) {
                 expect(item.url).toBeDefined();
-            });
+            })
+        });
+        it('has a filled URL', function () {
+            allFeeds.forEach(function (item) {
+                expect(item.url.length).not.toBe(0);
+            })
         });
 
         /* done: Write a test that loops through each feed
@@ -44,12 +49,12 @@ $(function() {
         it('has a name', function () {
             allFeeds.forEach(function (item) {
                 expect(item.name).toBeDefined();
-            });
+            })
         });
         it('item name is not empty', function () {
             allFeeds.forEach(function (item) {
                 expect(item.name).toBeTruthy();
-            });
+            })
         });
 
     });
@@ -63,7 +68,7 @@ $(function() {
 
         beforeAll(function () {
             body = $('body');
-        });
+        })
 
         /* done: Write a test that ensures the menu element is
          * hidden by default. You'll have to analyze the HTML and
@@ -72,7 +77,7 @@ $(function() {
          */
 
         it('is hidden by default', function () {
-            expect(body.attr('class')).toBe('menu-hidden');
+            expect(body.hasClass('menu-hidden')).toBe(true);
         });
 
          /* done: Write a test that ensures the menu changes
@@ -81,10 +86,13 @@ $(function() {
           * clicked and does it hide when clicked again.
           */
          it('menu click toggles display', function () {
-             $('.menu-icon-link').trigger('click');
-             expect(body.attr('class')).not.toBe('menu-hidden');
-             $('.menu-icon-link').trigger('click');
-             expect(body.attr('class')).toBe('menu-hidden');
+             if (body.hasClass('menu-hidden')) {
+                 $('.menu-icon-link').click();
+                 expect(body.hasClass('menu-hidden')).toBe(false);
+             } else {
+                 $('.menu-icon-link').click();
+                 expect(body.hasClass('menu-hidden')).toBe(true);
+             }
          });
 
     });
@@ -104,10 +112,9 @@ $(function() {
                 loadFeed(0,done());
         });
 
-        it('is not empty', function (done) {
-            var container = $('.feed');
+        it('is not empty', function () {
+            var container = $('.feed')
             expect(Boolean(container.find('entry'))).toBe(true);
-            done();
         });
 
     });
@@ -123,14 +130,15 @@ $(function() {
 
         beforeEach(function(done) {
             loadFeed(0, function() {
-                before = $('.header-title').text();
+                before = $('.feed').html();
 
                 loadFeed(1, function() {
-                    after = $('.header-title').text();
+                    after = $('.feed').html();
                     done();
                 });
             });
         });
+
         it('Should Change Contents when Loaded', function(done) {
             expect(before != after).toBe(true);
             done();
